@@ -1,210 +1,167 @@
 # PhishGuard CLI
 
-> **A Command-Line Phishing URL & Email Analyzer for SOC Analysts and Cybersecurity Students.**
+## Phishing URL and Email Analyzer
 
-PhishGuard CLI is a terminal-based defensive security inspection tool that performs static analysis, heuristic risk scoring, artifact extraction, and threat intelligence lookups on suspicious URLs and raw `.eml` email files. Built specifically for Linux, Kali Linux, and security triage workstations, it adheres to defensive cybersecurity best practices: **zero execution of untrusted payloads, zero fake data, full transparency in scoring, and lightweight terminal-first design.**
+PhishGuard is a Python-based command-line tool for analyzing suspicious URLs and email files.
 
----
+The project is built mainly for learning and practicing practical cybersecurity concepts such as phishing detection, email analysis, IOC extraction, DNS investigation, and basic threat intelligence.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Architecture & Directory Structure](#architecture--directory-structure)
-- [Installation & Setup](#installation--setup)
-- [Quick Start & Usage](#quick-start--usage)
-  - [Interactive Menu Mode](#interactive-menu-mode)
-  - [Command-Line Mode (CLI Flags)](#command-line-mode-cli-flags)
-- [Detection Engine & Rules](#detection-engine--rules)
-- [Risk Scoring Methodology](#risk-scoring-methodology)
-- [IOC Extraction & Defanging](#ioc-extraction--defanging)
-- [DNS Analysis](#dns-analysis)
-- [Optional Threat Intelligence](#optional-threat-intelligence)
-- [Report Generation](#report-generation)
-- [Security Considerations](#security-considerations)
-- [Testing](#testing)
-- [Limitations & Disclaimers](#limitations--disclaimers)
+The tool runs completely from the terminal and does not require a web interface.
 
 ---
 
-## Overview
+## What PhishGuard Does
 
-Security Operations Center (SOC) analysts and incident responders routinely encounter suspicious links and phishing reports. Running untrusted URLs or opening suspicious email attachments directly in a browser or desktop client introduces significant risk of exploitation or tracking.
+PhishGuard can analyze both URLs and `.eml` email files.
 
-**PhishGuard CLI** solves this by providing:
-1. **Local Static URL Deconstruction**: Dissects protocol, authority, ports, paths, query tokens, and identifies deceptive patterns (IP hosts, homographs, userinfo obfuscations, high-risk TLDs).
-2. **Safe MIME Email Parsing**: Audits headers, verifies email authentication (`SPF`, `DKIM`, `DMARC`), inspects attachment metadata/hashes, and parses text/HTML safely without executing JavaScript or rendering active content.
-3. **Transparent Heuristic Risk Scoring**: Calculates a transparent 0–100 score where every point is attributed to a specific detection rule.
-4. **Standardized IOC Extraction**: Identifies and deduplicates IPv4, IPv6, URLs, domains, emails, and cryptographic hashes (MD5, SHA1, SHA256), with one-click defanging (`hxxp://`, `[.]`) and export to JSON, CSV, or TXT.
+For URLs, it looks at different characteristics of the URL and checks for indicators that are commonly associated with suspicious or phishing links.
 
----
+For emails, it extracts information from the email headers and body, identifies links and other indicators, and checks for suspicious characteristics.
 
-## Key Features
-
-- **100% Terminal-Based**: No web servers, no frameworks, no database engines.
-- **Defensive Safety by Design**: Untrusted input is sanitized; attachments and JavaScript are never executed.
-- **Authentic Verification**: SPF, DKIM, and DMARC results are extracted strictly from RFC authentication headers—never faked or guessed.
-- **Extensible Detection Rule Engine**: Easily add new rules without altering core business logic.
-- **Defanged IOC Sharing**: Export sanitized IOCs ready for ticketing systems, threat feeds, or SIEM ingestion.
-- **Multi-Format Reporting**: Detailed reports in both human-readable plain text (`.txt`) and automated machine ingestion (`.json`).
-- **Optional Real Threat Intelligence**: Integrates seamlessly with VirusTotal (v3), URLhaus, and AbuseIPDB when API keys are supplied.
+The tool does not simply return "Phishing" or "Safe". It shows the indicators that were detected and explains how they contributed to the final risk score.
 
 ---
 
-## Architecture & Directory Structure
+## Features
 
-```text
-phishguard/
-│
-├── phishguard.py               # Main CLI entrypoint (Interactive menu & argparse dispatcher)
-│
-├── analyzers/                  # Analysis and extraction modules
-│   ├── __init__.py
-│   ├── url_analyzer.py         # URL component parsing & heuristic detection
-│   ├── email_analyzer.py       # MIME email parser, auth header audit, attachment safety
-│   ├── dns_analyzer.py         # Live DNS resolver (A, AAAA, MX, NS, TXT)
-│   ├── ioc_extractor.py        # IOC identification, defanging, multi-format export
-│   └── report_generator.py     # TXT and JSON report generation engine
-│
-├── detection/                  # Heuristic engine & scoring
-│   ├── __init__.py
-│   ├── rules.py                # Rule definitions, registries, and detection results
-│   └── scoring.py              # Transparent score calculation and factor attribution
-│
-├── threat_intel/               # Threat intelligence clients
-│   ├── __init__.py
-│   ├── virustotal.py           # VirusTotal v3 API client
-│   ├── urlhaus.py              # Abuse.ch URLhaus API client
-│   └── abuseipdb.py            # AbuseIPDB API v2 client
-│
-├── examples/                   # Safe sample test files
-│   ├── suspicious.eml          # Simulated phishing email with headers and attachment
-│   └── legitimate.eml          # Baseline clean email
-│
-├── reports/                    # Generated forensic reports
-│
-├── tests/                      # Automated unit test suite
-│   ├── test_url_analyzer.py
-│   ├── test_email_analyzer.py
-│   ├── test_ioc_extractor.py
-│   ├── test_rules_scoring.py
-│   ├── test_dns_analyzer.py
-│   └── test_report_generator.py
-│
-├── requirements.txt            # Python dependencies
-├── .env.example                # Template for optional API keys
-├── .gitignore
-└── README.md
+* URL analysis
+* Email (`.eml`) analysis
+* IOC extraction
+* Rule-based phishing detection
+* Risk scoring
+* DNS analysis
+* Email header analysis
+* SPF, DKIM and DMARC information when available
+* Suspicious URL detection
+* Domain and IP analysis
+* Optional threat intelligence integration
+* TXT and JSON report generation
+* Interactive terminal interface
+* Command-line arguments for automation
+
+---
+
+## Requirements
+
+You need the following installed on your system:
+
+* Python 3.10 or newer
+* Git
+* Internet connection for DNS and optional threat-intelligence lookups
+
+The project can be used on:
+
+* Kali Linux
+* Ubuntu
+* Debian
+* Windows
+* macOS
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/phishguard.git
 ```
 
----
+Move into the project directory:
 
-## Installation & Setup
-
-### Requirements
-- Linux (Ubuntu, Debian, Kali Linux, Arch) or macOS / Windows
-- Python 3.9+
-
-### Step 1: Clone or Navigate to Directory
 ```bash
 cd phishguard
 ```
 
-### Step 2: Create a Virtual Environment (Recommended)
+Create a virtual environment:
+
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate    # On Linux/macOS
-# or: .venv\Scripts\activate # On Windows PowerShell
+python3 -m venv venv
 ```
 
-### Step 3: Install Dependencies
+Activate the environment on Linux or Kali:
+
+```bash
+source venv/bin/activate
+```
+
+On Windows:
+
+```powershell
+venv\Scripts\activate
+```
+
+Install the required packages:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 4: Configure Threat Intelligence (Optional)
-If you wish to query VirusTotal, URLhaus, or AbuseIPDB:
-```bash
-cp .env.example .env
-```
-Edit `.env` with your API keys:
-```env
-VIRUSTOTAL_API_KEY=your_virustotal_api_key
-URLHAUS_API_KEY=your_urlhaus_api_key
-ABUSEIPDB_API_KEY=your_abuseipdb_api_key
-```
-> **Note**: If API keys are omitted or left blank, PhishGuard skips external lookups gracefully and relies purely on local static heuristics.
-
 ---
 
-## Quick Start & Usage
+## Running the Tool
 
-### Interactive Menu Mode
-
-Run without arguments to launch the interactive terminal interface:
+Start PhishGuard using:
 
 ```bash
 python3 phishguard.py
 ```
 
-Output:
+The tool will open an interactive menu:
+
 ```text
 ========================================
-          PHISHGUARD CLI
-     Phishing Threat Analyzer
+             PHISHGUARD CLI
+      Phishing URL & Email Analyzer
 ========================================
 
 [1] Analyze URL
-[2] Analyze Email (.eml)
+[2] Analyze Email
 [3] Extract IOCs
 [4] View Detection Rules
-[5] Export Report
-[6] Exit
+[5] Exit
 
 Select an option:
 ```
 
----
-
-### Command-Line Mode (CLI Flags)
-
-PhishGuard supports direct, non-interactive execution for automation, scripting, and pipeline integration:
-
-#### 1. Analyze a Suspicious URL
-```bash
-python3 phishguard.py --url "http://192.168.1.50/login"
-```
-
-#### 2. Analyze URL with Live DNS & Threat Intelligence
-```bash
-python3 phishguard.py --url "http://example.com" --dns --threat-intel
-```
-
-#### 3. Analyze an `.eml` Email File and Export Report
-```bash
-python3 phishguard.py --email examples/suspicious.eml --export
-```
-
-#### 4. Extract and Defang IOCs from Text or File
-```bash
-python3 phishguard.py --extract-ioc examples/suspicious.eml --defang
-```
-
-#### 5. Output Raw JSON for SIEM / Scripting Ingestion
-```bash
-python3 phishguard.py --url "http://192.168.1.50/login" --json
-```
-
-#### 6. Inspect Detection Rules
-```bash
-python3 phishguard.py --rules
-```
+Choose the operation you want to perform.
 
 ---
 
-## Example Terminal Output
+## Analyzing a URL
 
-### 1. URL Analysis
+Select:
+
+```text
+[1] Analyze URL
+```
+
+Enter the URL you want to investigate:
+
+```text
+Enter URL: https://example.com/login
+```
+
+PhishGuard checks several characteristics, including:
+
+* URL scheme
+* Domain
+* Subdomain
+* TLD
+* URL length
+* Path
+* Query parameters
+* IP address usage
+* Punycode
+* Suspicious characters
+* URL encoding
+* HTTP or HTTPS
+* Suspicious ports
+* Other detection rules
+
+The result will contain the observations and the rules that were triggered.
+
+Example:
 
 ```text
 ========================================
@@ -212,277 +169,508 @@ URL ANALYSIS
 ========================================
 
 URL:
-http://192.168.1.50:8080/login/verification?user=target
+http://192.168.1.50/login
 
 Scheme       : HTTP
 Host         : 192.168.1.50
-Domain       : 192.168.1.50
-Subdomain    : None
-TLD          : N/A
-Port         : 8080
-Path         : /login/verification
-URL Length   : 55
-Query Params : user=target
+Path         : /login
 
 ----------------------------------------
 DETECTION RESULTS
 ----------------------------------------
 
-[HIGH] IP address used as hostname
-       Evidence: Host '192.168.1.50' is a raw IPv4 address instead of a domain name.
-[MEDIUM] Suspicious or non-standard port
-       Evidence: URL uses non-standard web port '8080'.
-[LOW] HTTP instead of HTTPS
-       Evidence: Insecure plaintext protocol 'HTTP' used instead of HTTPS.
-[LOW] Suspicious phishing keyword
-       Evidence: Contains phishing/credential harvesting keywords: login, verification.
+[HIGH] IP address used instead of domain
+[MEDIUM] HTTP connection
+[LOW] Login-related keyword detected
 
 ----------------------------------------
 RISK ASSESSMENT
 ----------------------------------------
 
-Risk Score : 65/100
+Risk Score : 72/100
 Severity   : HIGH
-
-Reason:
-Multiple suspicious indicators were detected.
-
-Contributing factors:
-  URL001   +30  (IP address used as hostname)
-  URL004   +15  (Suspicious or non-standard port)
-  URL006   +10  (HTTP instead of HTTPS)
-  URL009   +10  (Suspicious phishing keyword)
-
-[NOTE] This is an automated risk assessment based on static heuristics and indicators.
-It does not constitute definitive proof that the target is malicious, nor does a low
-score guarantee safety. Always verify with sandbox analysis and threat intelligence.
 ```
+
+The risk score is an automated assessment based on the detected indicators. It is not a guarantee that a URL is malicious.
 
 ---
 
-### 2. Email Analysis
+## Analyzing an Email
+
+PhishGuard can analyze `.eml` files.
+
+Select:
+
+```text
+[2] Analyze Email
+```
+
+Then provide the path:
+
+```text
+Enter path to .eml file:
+samples/suspicious_email.eml
+```
+
+The tool extracts information such as:
+
+* Sender
+* Recipient
+* Reply-To
+* Subject
+* Date
+* Message-ID
+* Received headers
+* Authentication information
+* URLs
+* Domains
+* IP addresses
+* Attachments
+* MIME types
+
+It can also identify suspicious relationships between the sender and Reply-To addresses.
+
+Example:
 
 ```text
 ========================================
 EMAIL ANALYSIS
 ========================================
 
-File      : examples/suspicious.eml
-From      : PayPal Account Security <service-alert@notify-paypal-security-update.com>
-Reply-To  : credential-collector@stealth-exfil.net
-To        : target-analyst@security-operations.org
-Subject   : Urgent Action Required: Your account has been suspended!
-Date      : Fri, 25 Sep 2026 14:32:00 +0000
-Message-ID: <20260925.143200.999@notify-paypal-security-update.com>
+From:
+security@example.com
+
+Reply-To:
+support@example.net
+
+Subject:
+Verify Your Account
+
+----------------------------------------
+SENDER ANALYSIS
+----------------------------------------
+
+[HIGH] Reply-To domain differs from sender domain
 
 ----------------------------------------
 AUTHENTICATION
 ----------------------------------------
 
-SPF   : Fail
-DKIM  : Neutral
+SPF   : Not available
+DKIM  : Pass
 DMARC : Fail
-
-----------------------------------------
-EXTRACTED URLS
-----------------------------------------
-
-1. http://192.168.1.50:8080/login/verification?user=target&token=a83f9829f01b44ec
-
-----------------------------------------
-ATTACHMENTS
-----------------------------------------
-
-- verification_portal.html (application/octet-stream, 68 bytes) [!] HIGH RISK
-    SHA256: 3711134933b3dd8c5672551a526b00802cd8219b86b68707117e47b4b03c7650
-    Alert : High-risk file extension '.html' commonly abused for malware delivery or credential harvesting.
-
-----------------------------------------
-DETECTION RESULTS
-----------------------------------------
-
-[HIGH] Reply-To mismatch
-       Evidence: Reply-To domain 'stealth-exfil.net' does not match From domain 'notify-paypal-security-update.com'.
-[HIGH] Email authentication failure
-       Evidence: Explicit authentication verification failure: SPF (Fail), DMARC (Fail).
-[HIGH] Suspicious or dangerous attachment
-       Evidence: Contains potentially dangerous attachment(s): verification_portal.html (.html).
-[MEDIUM] Suspicious link in email body
-       Evidence: Suspicious links detected: IP-based URL: http://192.168.1.50:8080/login/verification...
-[LOW] Phishing urgency or credential keywords
-       Evidence: Detected urgent phishing sentiment keywords: urgent, immediately, unauthorized access.
-[MEDIUM] Return-Path domain mismatch
-       Evidence: Return-Path domain 'bad-relay-domain.org' differs from sender domain 'notify-paypal-security-update.com'.
-
-----------------------------------------
-RISK ASSESSMENT
-----------------------------------------
-
-Risk Score : 100/100
-Severity   : CRITICAL
-
-Reason:
-Multiple suspicious indicators were detected.
-
-Contributing factors:
-  EMAIL001 +30  (Reply-To mismatch)
-  EMAIL003 +25  (Email authentication failure)
-  EMAIL004 +30  (Suspicious or dangerous attachment)
-  EMAIL005 +20  (Suspicious link in email body)
-  EMAIL006 +10  (Phishing urgency or credential keywords)
-  EMAIL008 +15  (Return-Path domain mismatch)
 ```
 
----
-
-## Detection Engine & Rules
-
-PhishGuard employs a modular rule architecture in `detection/rules.py`. Every rule contains a unique Rule ID, category, severity rating, point score, and description.
-
-| Rule ID | Category | Severity | Score | Name | Description |
-|:---|:---:|:---:|:---:|:---|:---|
-| **URL001** | URL | HIGH | +30 | IP address used as hostname | Raw IPv4 or IPv6 used instead of domain name |
-| **URL002** | URL | MEDIUM | +15 | Suspicious URL length | URL length exceeds standard threshold (>75 chars) |
-| **URL003** | URL | HIGH | +25 | Punycode / IDN homograph detected | Hostname contains `xn--` or non-ASCII homoglyphs |
-| **URL004** | URL | MEDIUM | +15 | Suspicious or non-standard port | Web traffic over unusual ports (8080, 8443, 8888, 4444) |
-| **URL005** | URL | MEDIUM | +15 | Excessive subdomains | More than 3 subdomain labels concealing root domain |
-| **URL006** | URL | LOW | +10 | HTTP instead of HTTPS | Unencrypted plaintext transport protocol |
-| **URL007** | URL | LOW | +10 | Suspicious URL encoding | Heavy percent-encoding concealing dots, slashes, or script |
-| **URL008** | URL | HIGH | +25 | Embedded credentials (@ symbol) | Authority contains `@` tricking human visual inspection |
-| **URL009** | URL | LOW | +10 | Suspicious phishing keyword | Path, query, or subdomain contains login/verify/account |
-| **URL010** | URL | LOW | +10 | Suspicious high-risk TLD | Uses heavily abused TLD (.tk, .ml, .xyz, .top, .work) |
-| **URL011** | URL | HIGH | +30 | IP obfuscation (Hex/Octal/Dword) | Numeric representation bypasses naive string filters |
-| **URL012** | URL | MEDIUM | +15 | Double-slash / open redirect path | Multiple slashes or embedded protocol in path |
-| **URL013** | URL | HIGH | +25 | Dangerous file extension | Link points to executable (.exe, .scr, .iso, .vbs) |
-| **URL014** | URL | LOW | +10 | Brand impersonation hyphenation | Domain contains multiple hyphens mimicking brands |
-| **EMAIL001** | EMAIL | HIGH | +30 | Reply-To mismatch | Reply-To domain differs from From header domain |
-| **EMAIL002** | EMAIL | HIGH | +25 | Sender display name spoofing | Display name references different domain than sender |
-| **EMAIL003** | EMAIL | HIGH | +25 | Email authentication failure | SPF, DKIM, or DMARC explicitly reports Fail or SoftFail |
-| **EMAIL004** | EMAIL | HIGH | +30 | Dangerous attachment | Attachment is executable, script, archive, or HTML form |
-| **EMAIL005** | EMAIL | MEDIUM | +20 | Suspicious link in email body | Body contains IP-based links or deceptive anchors |
-| **EMAIL006** | EMAIL | LOW | +10 | Phishing urgency keywords | Urgent pressure tactics ("account suspended", "verify now") |
-| **EMAIL007** | EMAIL | LOW | +10 | Missing standard email headers | Missing RFC headers such as Message-ID or Date |
-| **EMAIL008** | EMAIL | MEDIUM | +15 | Return-Path domain mismatch | Envelope Return-Path contradicts From domain |
+The tool only analyzes the email. It does not execute attachments, scripts, or other active content contained inside the email.
 
 ---
 
-## Risk Scoring Methodology
+## Extracting IOCs
 
-Risk scores are computed transparently by summing points from all triggered rules, capped at 100:
+PhishGuard can extract common Indicators of Compromise from URLs and email files.
 
-| Score Range | Severity Tier | Action Guideline |
-|:---:|:---:|:---|
-| **0 – 19** | `INFORMATIONAL` | Standard benign indicators; baseline activity |
-| **20 – 39** | `LOW` | Minor anomalies detected; review context |
-| **40 – 59** | `MEDIUM` | Multiple suspicious signals; recommend manual review |
-| **60 – 79** | `HIGH` | Strong phishing indicators; isolate and escalate |
-| **80 – 100** | `CRITICAL` | Severe threat indicators confirmed; block and contain |
+It currently supports:
 
-Every analysis explicitly attributes which rules contributed points to the total score.
+```text
+URLs
+Domains
+IPv4 addresses
+IPv6 addresses
+Email addresses
+MD5 hashes
+SHA1 hashes
+SHA256 hashes
+```
+
+Example:
+
+```text
+========================================
+IOC EXTRACTION
+========================================
+
+URLs:
+- https://example.com/login
+
+Domains:
+- example.com
+
+IPv4:
+- 192.168.1.10
+
+Email Addresses:
+- attacker@example.com
+
+SHA256:
+- abc123...
+```
+
+These indicators can be exported for further investigation.
 
 ---
 
-## IOC Extraction & Defanging
+## Command-Line Usage
 
-PhishGuard includes an IOC engine capable of extracting and sanitizing:
-- **IPv4 & IPv6 Addresses**
-- **URLs**
-- **Domains & FQDNs**
-- **Email Addresses**
-- **Cryptographic Hashes**: MD5 (32 hex), SHA1 (40 hex), SHA256 (64 hex)
+PhishGuard can also be used without the interactive menu.
 
-### Defanging
-To prevent accidental clicks or weaponization when sharing IOCs in tickets:
-- `http://` ➔ `hxxp://`
-- `https://` ➔ `hxxps://`
-- `.` ➔ `[.]`
-- `@` ➔ `[@]`
+Analyze a URL:
 
-### Multi-Format Export
-Export IOCs in standard formats:
-- **JSON**: Structured key-value arrays
-- **CSV**: Two-column format (`ioc_type`, `value`) for Excel / SIEM loaders
-- **TXT**: Sectioned lists formatted for plain text notes
+```bash
+python3 phishguard.py --url "https://example.com"
+```
+
+Analyze an email:
+
+```bash
+python3 phishguard.py --email suspicious.eml
+```
+
+Extract IOCs from an email:
+
+```bash
+python3 phishguard.py --extract-ioc suspicious.eml
+```
+
+Request JSON output:
+
+```bash
+python3 phishguard.py --url "https://example.com" --json
+```
+
+This makes the tool easier to use in scripts and other security workflows.
+
+---
+
+## Detection Engine
+
+PhishGuard uses a rule-based detection engine.
+
+Some of the rules include:
+
+```text
+URL001 - IP address used as hostname
+URL002 - Suspicious URL length
+URL003 - Punycode detected
+URL004 - Suspicious port
+URL005 - Excessive subdomains
+URL006 - HTTP instead of HTTPS
+URL007 - Suspicious URL encoding
+
+EMAIL001 - Reply-To mismatch
+EMAIL002 - Suspicious sender domain
+EMAIL003 - Authentication failure
+EMAIL004 - Suspicious attachment
+EMAIL005 - Suspicious link
+```
+
+Each rule provides information about why it was triggered.
+
+This approach makes the result easier to understand than using a black-box classification system.
+
+---
+
+## Risk Scoring
+
+PhishGuard uses a simple risk scoring system:
+
+|  Score | Severity      |
+| -----: | ------------- |
+|   0–19 | Informational |
+|  20–39 | Low           |
+|  40–59 | Medium        |
+|  60–79 | High          |
+| 80–100 | Critical      |
+
+The score is calculated from the detection rules that were triggered.
+
+For example:
+
+```text
+Risk Score: 67/100
+
+URL001   +30
+URL003   +20
+URL006   +10
+URL007   +7
+```
+
+The score should be treated as an investigation aid rather than a final security decision.
 
 ---
 
 ## DNS Analysis
 
-For target domains, PhishGuard queries standard authoritative DNS records via `dnspython`:
-- **A** (IPv4 addresses)
-- **AAAA** (IPv6 addresses)
-- **MX** (Mail Exchange servers and priorities)
-- **NS** (Name servers)
-- **TXT** (SPF records, domain verification records)
+PhishGuard can perform DNS lookups for domains.
 
-Failures, timeouts, and NXDOMAIN conditions are caught and handled gracefully without crashing the analyzer.
+The tool can check records such as:
+
+```text
+A
+AAAA
+MX
+NS
+TXT
+```
+
+Example:
+
+```text
+========================================
+DNS INFORMATION
+========================================
+
+A:
+93.184.216.34
+
+AAAA:
+Not available
+
+MX:
+mail.example.com
+
+NS:
+ns1.example.com
+```
+
+DNS results depend on the network and DNS servers available at the time of analysis.
 
 ---
 
-## Optional Threat Intelligence
+## Threat Intelligence
 
-PhishGuard can query live external reputation providers without storing keys in code:
-- **VirusTotal (v3 API)**: Domain, IP, and URL reputation stats.
-- **URLhaus (Abuse.ch API)**: Active malware URL database status and tags.
-- **AbuseIPDB (v2 API)**: IP abuse confidence score and incident report count.
+PhishGuard can optionally connect to external threat-intelligence services.
 
-> **Integrity Guarantee**: When keys are missing or services are unreachable, PhishGuard clearly states `[INFO] Threat intelligence lookup skipped. API key not configured.` It **never** creates synthetic or fake results.
+Possible integrations include:
+
+* VirusTotal
+* URLhaus
+* AbuseIPDB
+
+API keys should be stored in environment variables rather than directly in the source code.
+
+Example `.env` file:
+
+```env
+VIRUSTOTAL_API_KEY=your_api_key
+URLHAUS_API_KEY=your_api_key
+ABUSEIPDB_API_KEY=your_api_key
+```
+
+Do not commit the `.env` file to GitHub.
+
+Add it to `.gitignore`:
+
+```gitignore
+.env
+venv/
+__pycache__/
+*.pyc
+```
+
+If no API key is configured, PhishGuard continues using its local analysis features.
 
 ---
 
-## Report Generation
+## Reports
 
-Reports are automatically stored in the `reports/` folder with timestamped filenames:
-- `reports/report_YYYYMMDD_HHMMSS.txt`: Complete human-readable SOC incident report.
-- `reports/report_YYYYMMDD_HHMMSS.json`: Machine-readable forensic payload containing all raw components, triggered rules, scores, extracted IOCs, and DNS data.
+Investigation reports can be saved in the `reports` directory.
+
+Example:
+
+```text
+reports/
+├── report_20260926_001530.txt
+└── report_20260926_001530.json
+```
+
+Reports contain information such as:
+
+* Investigation time
+* Target
+* Analysis type
+* Detected indicators
+* Risk score
+* Severity
+* Extracted IOCs
+* DNS information
+* Threat-intelligence results
+* Detection rules
 
 ---
 
-## Security Considerations
+## Project Structure
 
-As a defensive tool inspecting potentially untrusted content, PhishGuard adheres to strict defensive programming:
-1. **No Code Execution**: HTML email bodies are parsed with Python's streaming `html.parser`. Embedded JavaScript, stylesheets, and external assets are stripped and never executed.
-2. **Safe Attachment Handling**: Attachments are inspected strictly in-memory or streamed as byte arrays to calculate hashes and detect MIME types. They are never written to executable locations or executed.
-3. **DoS Prevention**: Strict file size limits (25MB max for `.eml` files, 5MB for text IOC inputs) prevent resource exhaustion.
-4. **Network Safety**: DNS lookups have a 3-second timeout and 5-second lifetime limit. External HTTP threat intelligence lookups enforce strict 6-second timeouts.
-5. **Credential Protection**: API keys are loaded via environment variables and `.env` files; they are never printed in cleartext in generated reports.
+```text
+phishguard/
+│
+├── phishguard.py
+│
+├── analyzers/
+│   ├── __init__.py
+│   ├── url_analyzer.py
+│   ├── email_analyzer.py
+│   ├── dns_analyzer.py
+│   └── ioc_extractor.py
+│
+├── detection/
+│   ├── __init__.py
+│   ├── rules.py
+│   └── scoring.py
+│
+├── threat_intel/
+│   ├── __init__.py
+│   ├── virustotal.py
+│   ├── urlhaus.py
+│   └── abuseipdb.py
+│
+├── reports/
+│
+├── tests/
+│
+├── requirements.txt
+├── .env.example
+├── .gitignore
+└── README.md
+```
 
 ---
 
 ## Testing
 
-PhishGuard includes an automated unit test suite covering normal inputs, edge cases, malformed data, and attacks:
+Run the tests using:
 
 ```bash
-# Run all unit tests
-python3 -m unittest discover -s tests -p "test_*.py" -v
+pytest
 ```
 
-Test coverage includes:
-- Normal, clean URLs
-- IP-based URLs and obfuscated IP representations (Hex, Octal, DWORD)
-- Punycode / IDN homograph URLs
-- Extremely long URLs and excessive subdomains
-- Dangerous file extensions and non-standard web ports
-- Normal emails with verified SPF/DKIM/DMARC
-- Phishing emails with Reply-To mismatch, display name spoofing, and failed authentication
-- Emails with dangerous attachments (`.html`, `.hta`, `.exe`)
-- Malformed `.eml` files
-- IOC extraction across all 8 data types, defanging, and export
-- Risk scoring bounds, severity classification, and score capping
-- DNS resolution exception handling
-- Threat intelligence error and unconfigured states
+The test suite should cover things such as:
+
+* URL parsing
+* Suspicious URL detection
+* IP-based URLs
+* Punycode detection
+* URL encoding
+* Email parsing
+* Reply-To mismatch
+* IOC extraction
+* Risk scoring
+* DNS failures
+* Invalid email files
+
+Tests should use controlled examples rather than real malicious URLs or malware.
 
 ---
 
-## Limitations & Disclaimers
+## Security Considerations
 
-1. **Automated Heuristic Assessment**: Static heuristic scoring provides rapid prioritization for triage. A low score does not guarantee absolute safety (e.g., zero-day phishing on a newly registered benign service).
-2. **Encrypted Attachments**: Password-protected archives (e.g., `.zip` with password) cannot be inspected internally by static analysis alone.
-3. **Legitimate Use**: Designed for defensive cybersecurity analysis, SOC incident response, and academic educational training.
+PhishGuard is designed to analyze untrusted input.
+
+The tool should never:
+
+* Execute email attachments
+* Execute JavaScript from email content
+* Run downloaded files
+* Expose API keys
+* Automatically execute suspicious content
+
+Network requests should use reasonable timeouts and redirects should be handled carefully.
+
+If an email contains confidential information, consider whether sending its indicators to an external threat-intelligence service is appropriate before enabling API integrations.
 
 ---
 
-## License
+## Example Investigation
 
-MIT License. Developed for SOC analysts, incident response teams, and cybersecurity students.
+A typical investigation might look like this:
+
+```text
+Start PhishGuard
+
+        |
+        v
+
+Analyze Email
+
+        |
+        v
+
+Read suspicious_email.eml
+
+        |
+        v
+
+Extract headers, URLs and IOCs
+
+        |
+        v
+
+Run detection rules
+
+        |
+        v
+
+Calculate risk score
+
+        |
+        v
+
+Perform DNS / threat-intelligence checks
+
+        |
+        v
+
+Review findings
+
+        |
+        v
+
+Export investigation report
+```
+
+The goal is not just to provide a final verdict, but to give the analyst enough information to understand why the email or URL was considered suspicious.
+
+---
+
+## Learning Goals
+
+This project is intended to provide practical experience with:
+
+* Python
+* Email security
+* HTTP and URLs
+* DNS
+* IOC analysis
+* Threat intelligence
+* Detection engineering
+* Phishing analysis
+* Security automation
+* SOC investigation workflows
+
+---
+
+## Limitations
+
+PhishGuard is not a replacement for a commercial email security gateway or a complete malware-analysis platform.
+
+A URL can appear normal while still being malicious, and a suspicious indicator does not necessarily mean that an item is malicious.
+
+The results should therefore be treated as supporting evidence for an investigation.
+
+---
+
+## Disclaimer
+
+PhishGuard is intended for educational and defensive cybersecurity purposes.
+
+Only analyze URLs, emails, systems, and data that you are authorized to investigate.
+
+The tool provides automated analysis and should not be treated as a definitive security verdict.
+
+---
+
+## Author
+
+Kunal
+
+Cybersecurity Student
+Interested in SOC, Blue Team and Security Research
