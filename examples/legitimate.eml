@@ -1,0 +1,18 @@
+From: "GitHub" <noreply@github.com>
+Reply-To: support@github.com
+Return-Path: <noreply@github.com>
+To: developer@example.com
+Subject: [GitHub] Security advisory published
+Date: Fri, 25 Sep 2026 12:00:00 +0000
+Message-ID: <github/security/adv/20260925@github.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Authentication-Results: mx.example.com; spf=pass; dkim=pass; dmarc=pass
+
+A new security advisory has been published for a dependency in your repository.
+
+View the full advisory details here:
+https://github.com/advisories/GHSA-xxxx-yyyy-zzzz
+
+Thank you,
+The GitHub Team

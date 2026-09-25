@@ -1,0 +1,32 @@
+From: "PayPal Account Security" <service-alert@notify-paypal-security-update.com>
+Reply-To: credential-collector@stealth-exfil.net
+Return-Path: <bounce@bad-relay-domain.org>
+To: target-analyst@security-operations.org
+Subject: Urgent Action Required: Your account has been suspended!
+Date: Fri, 25 Sep 2026 14:32:00 +0000
+Message-ID: <20260925.143200.999@notify-paypal-security-update.com>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="====BOUNDARY_PG_DEMO===="
+Authentication-Results: mx.security-operations.org; spf=fail (domain notify-paypal-security-update.com does not designate sender); dkim=neutral; dmarc=fail
+
+--====BOUNDARY_PG_DEMO====
+Content-Type: text/plain; charset="utf-8"
+
+Dear Valued Customer,
+
+We detected unauthorized access to your account from IP 192.168.1.50.
+Your account access is currently restricted. You must verify your credentials immediately within 24 hours to prevent permanent closure.
+
+Verify your identity here:
+http://192.168.1.50:8080/login/verification?user=target&token=a83f9829f01b44ec
+
+Regards,
+Security Operations Center
+PayPal Department
+
+--====BOUNDARY_PG_DEMO====
+Content-Type: application/octet-stream; name="verification_portal.html"
+Content-Disposition: attachment; filename="verification_portal.html"
+
+<!DOCTYPE html><html><body><h1>Fake Phishing Form</h1></body></html>
+--====BOUNDARY_PG_DEMO====--

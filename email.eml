@@ -1,0 +1,528 @@
+Delivered-To: kunalmaidkar@gmail.com
+Received: by 2002:a05:7301:7b08:b0:30e:fa7c:bf1b with SMTP id wd8csp1951285dyb;
+        Fri, 4 Sep 2026 19:06:44 -0700 (PDT)
+X-Received: by 2002:a05:622a:a11:b0:51b:f25c:2896 with SMTP id d75a77b69052e-530547fbed7mr105093851cf.11.1788574003751;
+        Fri, 04 Sep 2026 19:06:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788574003; cv=none;
+        d=google.com; s=arc-20260327;
+        b=O9tRBF3RKVyI50mpAXm/EKYNHmjP0cNyub68z+TtjN+vx9F6dWNwQpUHaacyTf6Z2A
+         WCdXzdx24RDBbQqxhbjodiRqTRWx+4L6TzApvv6NBFWbJoMALaeohq94S7Sp3GvONvbD
+         ESoFKbhNGRdyiA5yqJC0PUsaNvYvS6kk8eLRBB5IH7a1G3qQ9ng/dnLrFaamfzta9Yus
+         NZ3+s+1BoH8+7/QoUx2o3eqGvs81xetNyCzrAL0r38lunVVzjORf6LP8DWhxXxsasGUy
+         03lq70MwWz4ASxe3bWmEqa2KkfG7Xc9LtmoqGy9FewyoRBlh7GFCQo4pC8OqOkDNMdZ/
+         DMpw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:list-unsubscribe-post:list-unsubscribe:feedback-id:subject
+         :message-id:mime-version:from:date:content-transfer-encoding
+         :dkim-signature:dkim-signature;
+        bh=4GuIB/aznKJ6AjbLIAkMiGurxfFAcc85MULcX2YTXAE=;
+        fh=Xg/IsTtEWqyUKSbnq+Ptaa/JuFdUTw2LVUhQ4QNOqxs=;
+        b=DeqAeTnr6U6fq7RtCPvklJmCXrLpc0khM5wzKFmBCmPv8l+qA3CR/Ok8RwdDqEoCMo
+         nAr2T5iZ7MaaclPH3HtISB+9eCa7r0pir9NbpMCYvcczuAnUuDFJ2B64Ujj56R7RI+CH
+         ACtF1iptkuLpK+yDiLpEi+m+p1qLsURr6DG0jUo3yiwOY5Jas5cr0vAnNZMggbObyXWl
+         A6y89WQdRffxXMD8FZ7uZTj5RfMHTMbpld86goPjpLqVAcHha8DK+ryhjtGDpNjySTld
+         n6JRttjIDdlexQGdLzO6UfmbdPIqQIpT2xFFSaWAtMlZBSUlc38zg8KCxd3yBHdEHL+5
+         KNyw==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@appwrite.io header.s=s1 header.b=N3HFg4nv;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b="NKjZMqA/";
+       spf=pass (google.com: domain of bounces+110812767-3afa-kunalmaidkar=gmail.com@em3680.appwrite.io designates 159.26.177.100 as permitted sender) smtp.mailfrom="bounces+110812767-3afa-kunalmaidkar=gmail.com@em3680.appwrite.io";
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=appwrite.io
+Return-Path: <bounces+110812767-3afa-kunalmaidkar=gmail.com@em3680.appwrite.io>
+Received: from o2.ptr3339.appwrite.io (o2.ptr3339.appwrite.io. [159.26.177.100])
+        by mx.google.com with ESMTPS id d75a77b69052e-53054533d14si43028921cf.373.2026.09.04.19.06.43
+        for <kunalmaidkar@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 04 Sep 2026 19:06:43 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounces+110812767-3afa-kunalmaidkar=gmail.com@em3680.appwrite.io designates 159.26.177.100 as permitted sender) client-ip=159.26.177.100;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@appwrite.io header.s=s1 header.b=N3HFg4nv;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b="NKjZMqA/";
+       spf=pass (google.com: domain of bounces+110812767-3afa-kunalmaidkar=gmail.com@em3680.appwrite.io designates 159.26.177.100 as permitted sender) smtp.mailfrom="bounces+110812767-3afa-kunalmaidkar=gmail.com@em3680.appwrite.io";
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=appwrite.io
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=appwrite.io;
+	h=content-transfer-encoding:content-type:date:from:mime-version:subject:
+	feedback-id:list-unsubscribe:list-unsubscribe-post:to:cc:content-type:date:
+	feedback-id:from:subject:to;
+	s=s1; t=1788574001;
+	bh=4GuIB/aznKJ6AjbLIAkMiGurxfFAcc85MULcX2YTXAE=;
+	b=N3HFg4nv+iyFAl4zO5laTj+MJlXTSxcjJADlxtNv393RSzxtTV/BvwqcirKMhzEe+e6O
+	tzsyRXLQObeaVULD0pfmjj6+pr8QJyTwiSd+aiVKE2ouoGxUaoxkhPmxqE7E6ENM3jL7G4
+	UnsKUZ2uw7Zktgc8OnPJ/pA9AZ7FFvMO21w/nBNpUHrscjVG2SU2EVp+T8S/Lwhr8B2X+Q
+	+Lk9mTmtj9hGMCwkTt7ngPBlBY3hWnx/WPM5+u49wclnoBgPs1bmY5DcDlqLMryl3nbawR
+	QsEpCrKcutG2nCRSFQthz/aSow8ey1164F7iQiH9tmi0ghwyh4OfUfSx1L3FZ/vw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.info;
+	h=content-transfer-encoding:content-type:date:from:mime-version:subject:
+	feedback-id:list-unsubscribe:list-unsubscribe-post:to:cc:content-type:date:
+	feedback-id:from:subject:to;
+	s=smtpapi; t=1788574001;
+	bh=4GuIB/aznKJ6AjbLIAkMiGurxfFAcc85MULcX2YTXAE=;
+	b=NKjZMqA/ixquuD0ZCXcXuM9Lo9lNg5DDYqSQr8ND1N0PSAqnayzPjzAVTkURwETDgiGt
+	jrU159qW9M+j7J7uPZRPMW4MtMKvY1V6j6O2pklpg0Mtw6w0CeNwXYxGxzGicdD2ZzpD94
+	oO7lNHroNQsJe8WclvwVTjxLLIWnvDWzs=
+Received: by recvd-5c8f44b778-xts78 with SMTP id recvd-5c8f44b778-xts78-1-6A9B792B-4B
+	2026-09-05 02:06:35.017704435 +0000 UTC m=+3309379.270987870
+Received: from MTEwODEyNzY3 (unknown)
+	by geopod-ismtpd-16 (SG) with HTTP
+	id 7ORKkxjlSxqVHdcg_EOajg
+	Sat, 05 Sep 2026 02:06:34.776 +0000 (UTC)
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=utf-8
+Date: Sat, 05 Sep 2026 02:06:41 +0000 (UTC)
+From: Eldad at Appwrite <eldad@appwrite.io>
+Mime-Version: 1.0
+Message-ID: <7ORKkxjlSxqVHdcg_EOajg@geopod-ismtpd-16>
+Subject: We saved three big launches for the final day
+Feedback-ID: 6a898edb0000d5f6e501:campaign:pulse
+List-Unsubscribe:
+ <https://pulse.appwrite.io/unsubscribe?campaignId=6a898edb0000d5f6e501&contactId=ct_fd9d8f269e43983f9c61f32a44470114a&email=kunalmaidkar%40gmail.com&token=32123e93b46d2db271ff0c8b0e43457f9b66d5756189832fbfe8cf4c2540d19e>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+X-SG-EID: 
+ =?us-ascii?Q?u001=2ETMVYwkKJqkZRYr8Tg=2F6goXuaKAZWPMWnIIjVazprUHp1qeSxLmzRl5MoJ?=
+ =?us-ascii?Q?Ch0ZidbSDJJYXbCfKUqnCoRS5S0hFdECEaTP2YM?=
+ =?us-ascii?Q?yo7gBplB55BoaeFou0svo0tMYLn3B0ThwEtUozC?=
+ =?us-ascii?Q?FIhyTOtjmKUmkAI6N31TgY1u8lu2XjcVsKzmWAB?=
+ =?us-ascii?Q?CdUDU5=2Fd3kFzC3lyJlkCUhu7XRlbFp89UFu=2Fxto?=
+ =?us-ascii?Q?ptWv6A2+3UlKibi6gaUreeIgXTPEZd9i5f7hNs1?= =?us-ascii?Q?HggQ?=
+X-SG-ID: 
+ =?us-ascii?Q?u001=2ESdBcvi+Evd=2FbQef8eZF3BvRBLLSxBNQRKjHoftBXi=2FXB2pZTE+HnZcZuu?=
+ =?us-ascii?Q?56a4vflB4i4kuNH=2FRpiqJpAUz30bBTuv1qXkxvt?=
+ =?us-ascii?Q?9WDhXArsaLoPdPmVRs6DYtm3J+I59+Sdyjm5E4w?=
+ =?us-ascii?Q?M=2FWyDKzRVq11uwFJNzeGOjiE=2F1TiCYJwyyTaaOl?=
+ =?us-ascii?Q?6eaIvo4XSEb=2FmBP7KoJwxCBCnYWfJa8gcwerUqT?=
+ =?us-ascii?Q?7v=2FGxOevfrr4IoVrIfPDRiZuwLtmYOP2b53lOJb?=
+ =?us-ascii?Q?=2FWDtCUVTyHykio6N3BWlOIo2PauinnsJo0Hltdn?=
+ =?us-ascii?Q?BUzYzOKVq+8kyWKIqLc3pn512Y=2F9C?=
+To: Kunal Maidkar <kunalmaidkar@gmail.com>
+X-Entity-ID: u001.rDuPmz/1jXSZfAAsH7bQLA==
+
+<!--pulse-doc:eyJ2ZXJzaW9uIjoxLCJraW5kIjoiaHRtbCIsInNldHRpbmdzIjp7IndpZHRoI=
+jo2MDAsInBhZFgiOjQwLCJwYWRZIjozMiwicGFnZUJnIjoiI2Y3ZjdmOCIsImNvbnRlbnRCZyI6=
+IiNmZmZmZmYiLCJmb250RmFtaWx5IjoiQXJpYWwsIEhlbHZldGljYSwgc2Fucy1zZXJpZiIsInR=
+leHRDb2xvciI6IiM1NjU2NWMiLCJoZWFkaW5nQ29sb3IiOiIjMTkxOTFkIiwibGlua0NvbG9yIj=
+oiI2ZkMzY2ZSIsImJyYW5kQmFyIjpmYWxzZSwiYnJhbmRDb2xvciI6IiNmZDM2NmUiLCJib3JkZ=
+XJlZCI6dHJ1ZX0sImJsb2NrcyI6W3siaWQiOiJiMWJiYmgiLCJ0eXBlIjoiaW1hZ2UiLCJzcmMi=
+OiJodHRwczovL2ZyYS5jbG91ZC5hcHB3cml0ZS5pby92MS9zdG9yYWdlL2J1Y2tldHMvZW1haWw=
+tYXNzZXRzL2ZpbGVzLzZhNmI0NTdjMDAwNjU0YjEwOGQ3L3ZpZXc/cHJvamVjdD02YTI2YzZkNT=
+AwMjdjMTdjNDJhNiIsImFsdCI6IkFwcHdyaXRlIiwiaHJlZiI6IiIsIndpZHRoIjoxMCwiYWxpZ=
+24iOiJsZWZ0IiwicmFkaXVzIjowfSx7ImlkIjoiYjdpNWQwIiwidHlwZSI6InRleHQiLCJodG1s=
+IjoiSGkgPGI+e3tmaXJzdF9uYW1lfX0sPC9iPiIsImFsaWduIjoibGVmdCIsImNvbG9yIjoiIiw=
+ic2l6ZSI6MTV9LHsiaWQiOiJiM2Z5NnIiLCJ0eXBlIjoidGV4dCIsImh0bWwiOiI8c3Ryb25nPl=
+dlbGNvbWUgdG8gRGF5IDUgb2YgSW5pdC4gPC9zdHJvbmc+V2XigJlyZSBjbG9zaW5nIG91dCB0a=
+GUgd2VlayB3aXRoIHRocmVlIG1vcmUgcmVsZWFzZXMgb24gQXBwd3JpdGUgQ2xvdWQuPGJyPjxi=
+cj5Ub2RheSwgd2XigJlyZSBpbnRyb2R1Y2luZyA8c3Ryb25nPkFwcHdyaXRlIERvbWFpbnMsIEF=
+wcHdyaXRlIEZpcmV3YWxsLCBhbmQgdGhlIEFwcHdyaXRlIE9BdXRoMiBTZXJ2ZXI8L3N0cm9uZz=
+4sIGdpdmluZyB5b3UgbW9yZSBjb250cm9sIG92ZXIgaG93IHlvdXIgYXBwIGlzIGhvc3RlZCwgc=
+HJvdGVjdGVkLCBhbmQgY29ubmVjdGVkIHRvIG90aGVyIGFwcGxpY2F0aW9ucy4iLCJhbGlnbiI6=
+ImxlZnQiLCJjb2xvciI6IiIsInNpemUiOjE1fSx7ImlkIjoiYmM5dDh1IiwidHlwZSI6ImhlYWR=
+pbmciLCJsZXZlbCI6MiwiaHRtbCI6Ik1hbmFnZSB5b3VyIERvbWFpbnMgd2l0aCBBcHB3cml0ZS=
+IsImFsaWduIjoibGVmdCIsImNvbG9yIjoiIiwic2l6ZSI6MTl9LHsiaWQiOiJiNGd5eGsiLCJ0e=
+XBlIjoiaW1hZ2UiLCJzcmMiOiJodHRwczovL2ZyYS5jbG91ZC5hcHB3cml0ZS5pby92MS9zdG9y=
+YWdlL2J1Y2tldHMvZW1haWwtYXNzZXRzL2ZpbGVzLzZhOWFjYjZiMDAwYWE1YjQ2NWUxL3ZpZXc=
+/cHJvamVjdD02YTI2YzZkNTAwMjdjMTdjNDJhNiIsImFsdCI6IiIsImhyZWYiOiIiLCJ3aWR0aC=
+I6MTAwLCJhbGlnbiI6ImNlbnRlciIsInJhZGl1cyI6OH0seyJpZCI6ImIzaWo1YyIsInR5cGUiO=
+iJ0ZXh0IiwiaHRtbCI6IkFwcHdyaXRlIGNhbiBub3cgYWN0IGFzIHlvdXIgPHN0cm9uZz5kb21h=
+aW4gcmVnaXN0cmFyIGFuZCBETlMgaG9zdDwvc3Ryb25nPi5cbjxicj48YnI+UmVnaXN0ZXIgYSB=
+uZXcgZG9tYWluIGFjcm9zcyAxNjArIFRMRHMsIHRyYW5zZmVyIG9uZSB5b3UgYWxyZWFkeSBvd2=
+4sIG1hbmFnZSBETlMgcmVjb3JkcywgYW5kIGNvbm5lY3QgeW91ciBkb21haW5zIGRpcmVjdGx5I=
+HRvIFNpdGVzLCBGdW5jdGlvbnMsIGFuZCBBUElzLiIsImFsaWduIjoibGVmdCIsImNvbG9yIjoi=
+Iiwic2l6ZSI6MTV9LHsiaWQiOiJiYmp4MXUiLCJ0eXBlIjoiYnV0dG9uIiwibGFiZWwiOiJSZWF=
+kIG1vcmUiLCJocmVmIjoiaHR0cHM6Ly9hcHB3cml0ZS5pby9ibG9nL3Bvc3QvYW5ub3VuY2luZy=
+1hcHB3cml0ZS1kb21haW5zIiwiYWxpZ24iOiJsZWZ0IiwiYmciOiIiLCJjb2xvciI6IiNmZmZmZ=
+mYiLCJyYWRpdXMiOjgsImZ1bGxXaWR0aCI6ZmFsc2V9LHsiaWQiOiJibTZmd24iLCJ0eXBlIjoi=
+ZGl2aWRlciIsImNvbG9yIjoiI2VkZWRmMCIsInRoaWNrbmVzcyI6MSwicGFkZGluZyI6MTR9LHs=
+iaWQiOiJiNTNzZ3IiLCJ0eXBlIjoiaGVhZGluZyIsImxldmVsIjoyLCJodG1sIjoiQ29udHJvbC=
+B0cmFmZmljIHdpdGggQXBwd3JpdGUgRmlyZXdhbGwiLCJhbGlnbiI6ImxlZnQiLCJjb2xvciI6I=
+iIsInNpemUiOjE5fSx7ImlkIjoiYmVnNTlwIiwidHlwZSI6ImltYWdlIiwic3JjIjoiaHR0cHM6=
+Ly9mcmEuY2xvdWQuYXBwd3JpdGUuaW8vdjEvc3RvcmFnZS9idWNrZXRzL2VtYWlsLWFzc2V0cy9=
+maWxlcy82YTlhY2I3ZTAwMmY0ZjI3MDMwMy92aWV3P3Byb2plY3Q9NmEyNmM2ZDUwMDI3YzE3Yz=
+QyYTYiLCJhbHQiOiIiLCJocmVmIjoiIiwid2lkdGgiOjEwMCwiYWxpZ24iOiJjZW50ZXIiLCJyY=
+WRpdXMiOjh9LHsiaWQiOiJiZDFieGQiLCJ0eXBlIjoidGV4dCIsImh0bWwiOiJBcHB3cml0ZSBG=
+aXJld2FsbCBhZGRzIDxzdHJvbmc+cHJvamVjdC1sZXZlbCB0cmFmZmljIGNvbnRyb2w8L3N0cm9=
+uZz4gdG8geW91ciBBUEksIEZ1bmN0aW9ucywgYW5kIFNpdGVzLjxicj5cbjxicj5DcmVhdGUgcn=
+VsZXMgdG8gZGVueSwgYnlwYXNzLCBjaGFsbGVuZ2UsIHJhdGUtbGltaXQsIG9yIHJlZGlyZWN0I=
+HJlcXVlc3RzIGJhc2VkIG9uIGF0dHJpYnV0ZXMgbGlrZSBJUCBhZGRyZXNzLCBob3N0bmFtZSwg=
+cGF0aCwgaGVhZGVycywgdXNlciBhZ2VudCwgb3IgbG9jYXRpb24uIiwiYWxpZ24iOiJsZWZ0Iiw=
+iY29sb3IiOiIiLCJzaXplIjoxNX0seyJpZCI6ImJmNnd2ZyIsInR5cGUiOiJidXR0b24iLCJsYW=
+JlbCI6IkxlYXJuIG1vcmUiLCJocmVmIjoiaHR0cHM6Ly9hcHB3cml0ZS5pby9ibG9nL3Bvc3QvY=
+W5ub3VuY2luZy1hcHB3cml0ZS1maXJld2FsbCIsImFsaWduIjoibGVmdCIsImJnIjoiIiwiY29s=
+b3IiOiIjZmZmZmZmIiwicmFkaXVzIjo4LCJmdWxsV2lkdGgiOmZhbHNlfSx7ImlkIjoiYm5mYmR=
+yIiwidHlwZSI6ImRpdmlkZXIiLCJjb2xvciI6IiNlZGVkZjAiLCJ0aGlja25lc3MiOjEsInBhZG=
+RpbmciOjE0fSx7ImlkIjoiYjgzdmkzIiwidHlwZSI6ImhlYWRpbmciLCJsZXZlbCI6MiwiaHRtb=
+CI6IlR1cm4geW91ciBwcm9qZWN0IGludG8gYW4gaWRlbnRpdHkgcHJvdmlkZXIiLCJhbGlnbiI6=
+ImxlZnQiLCJjb2xvciI6IiIsInNpemUiOjE5fSx7ImlkIjoiYjkxNWZoIiwidHlwZSI6ImltYWd=
+lIiwic3JjIjoiaHR0cHM6Ly9mcmEuY2xvdWQuYXBwd3JpdGUuaW8vdjEvc3RvcmFnZS9idWNrZX=
+RzL2VtYWlsLWFzc2V0cy9maWxlcy82YTlhY2I4NTAwMmMxM2RhZTY4Ni92aWV3P3Byb2plY3Q9N=
+mEyNmM2ZDUwMDI3YzE3YzQyYTYiLCJhbHQiOiIiLCJocmVmIjoiIiwid2lkdGgiOjEwMCwiYWxp=
+Z24iOiJjZW50ZXIiLCJyYWRpdXMiOjh9LHsiaWQiOiJiYTZ5aHciLCJ0eXBlIjoidGV4dCIsImh=
+0bWwiOiJZb3VyIEFwcHdyaXRlIHByb2plY3QgY2FuIG5vdyBhY3QgYXMgYW4gPHN0cm9uZz5PQX=
+V0aCAyLjEgYW5kIE9wZW5JRCBDb25uZWN0IHByb3ZpZGVyPC9zdHJvbmc+Ljxicj5cbjxicj5Ua=
+GlyZC1wYXJ0eSBhcHBzIGNhbiBvZmZlciA8c3Ryb25nPjxhIGhyZWY9XCJodHRwczovL2FwcHdy=
+aXRlLmlvL2Jsb2cvcG9zdC9hbm5vdW5jaW5nLWFwcHMtZm9yLWFwcHdyaXRlLXBhcnRuZXJzXCI=
++U2lnbiBpbiB3aXRoIHlvdXIgcHJvZHVjdDwvYT48L3N0cm9uZz4sIHJlcXVlc3Qgc2NvcGVkIG=
+FjY2VzcyB0byB5b3VyIEFQSXMsIGFuZCB1c2Ugc3RhbmRhcmQgT0F1dGggYW5kIE9JREMgZmxvd=
+3Mgd2hpbGUgQXBwd3JpdGUgaGFuZGxlcyB0aGUgYXV0aG9yaXphdGlvbiBpbmZyYXN0cnVjdHVy=
+ZS4iLCJhbGlnbiI6ImxlZnQiLCJjb2xvciI6IiIsInNpemUiOjE1fSx7ImlkIjoiYmpkcHRmIiw=
+idHlwZSI6ImJ1dHRvbiIsImxhYmVsIjoiUmVhZCBtb3JlIiwiaHJlZiI6Imh0dHBzOi8vYXBwd3=
+JpdGUuaW8vYmxvZy9wb3N0L2Fubm91bmNpbmctb2F1dGgyLXNlcnZlciIsImFsaWduIjoibGVmd=
+CIsImJnIjoiIiwiY29sb3IiOiIjZmZmZmZmIiwicmFkaXVzIjo4LCJmdWxsV2lkdGgiOmZhbHNl=
+fSx7ImlkIjoiYm9tZGEiLCJ0eXBlIjoiZGl2aWRlciIsImNvbG9yIjoiI2VkZWRmMCIsInRoaWN=
+rbmVzcyI6MSwicGFkZGluZyI6MTR9LHsiaWQiOiJiaDhyZmMiLCJ0eXBlIjoiaGVhZGluZyIsIm=
+xldmVsIjoyLCJodG1sIjoiV2F0Y2ggdGhlIERheSA1IGxpdmVzdHJlYW0gcmVjb3JkaW5nIiwiY=
+WxpZ24iOiJsZWZ0IiwiY29sb3IiOiIiLCJzaXplIjoxOX0seyJpZCI6ImJsajd0biIsInR5cGUi=
+OiJpbWFnZSIsInNyYyI6Imh0dHBzOi8vZnJhLmNsb3VkLmFwcHdyaXRlLmlvL3YxL3N0b3JhZ2U=
+vYnVja2V0cy9lbWFpbC1hc3NldHMvZmlsZXMvNmE5YWNiYjQwMDJhYWUyMWE1YjMvdmlldz9wcm=
+9qZWN0PTZhMjZjNmQ1MDAyN2MxN2M0MmE2IiwiYWx0IjoiIiwiaHJlZiI6IiIsIndpZHRoIjoxM=
+DAsImFsaWduIjoiY2VudGVyIiwicmFkaXVzIjo4fSx7ImlkIjoiYmlpamhqIiwidHlwZSI6InRl=
+eHQiLCJodG1sIjoiV2Ugd3JhcHBlZCB1cCB0aGUgZmluYWwgZGF5IG9mIEluaXQgd2l0aCBhIGx=
+pdmVzdHJlYW0gY292ZXJpbmcgPHN0cm9uZz5BcHB3cml0ZSBEb21haW5zLCBGaXJld2FsbCwgYW=
+5kIE9BdXRoMiBTZXJ2ZXI8L3N0cm9uZz4sIGFsb25nIHdpdGggZGVtb3MgYW5kIHF1ZXN0aW9uc=
+yBmcm9tIHRoZSBjb21tdW5pdHkuPGJyPlxuPGJyPldlIGFsc28gYW5ub3VuY2VkIHRoZSB3aW5u=
+ZXIgb2Ygb3VyIGdyYW5kIHByaXplLCA8c3Ryb25nPjEyIG1vbnRocyBvZiBDbGF1ZGUgTWF4IDI=
+weDwvc3Ryb25nPiwgZHVyaW5nIHRoZSBzdHJlYW0uXG4iLCJhbGlnbiI6ImxlZnQiLCJjb2xvci=
+I6IiIsInNpemUiOjE1fSx7ImlkIjoiYmdlcGprIiwidHlwZSI6ImJ1dHRvbiIsImxhYmVsIjoiV=
+2F0Y2ggdGhlIHJlY29yZGluZyIsImhyZWYiOiJodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRj=
+aD92PUxZcTBxdHlRbUprIiwiYWxpZ24iOiJsZWZ0IiwiYmciOiIiLCJjb2xvciI6IiNmZmZmZmY=
+iLCJyYWRpdXMiOjgsImZ1bGxXaWR0aCI6ZmFsc2V9LHsiaWQiOiJiMTdpOG8iLCJ0eXBlIjoiZG=
+l2aWRlciIsImNvbG9yIjoiI2VkZWRmMCIsInRoaWNrbmVzcyI6MSwicGFkZGluZyI6MTR9LHsia=
+WQiOiJiMmV1bTQiLCJ0eXBlIjoiaGVhZGluZyIsImxldmVsIjoyLCJodG1sIjoiSm9pbiB1cyBm=
+b3IgdGhlIEluaXQgY2xvc2luZyBwYXJ0eSIsImFsaWduIjoibGVmdCIsImNvbG9yIjoiIiwic2l=
+6ZSI6MTl9LHsiaWQiOiJiNTMwYm8iLCJ0eXBlIjoiaW1hZ2UiLCJzcmMiOiJodHRwczovL2ZyYS=
+5jbG91ZC5hcHB3cml0ZS5pby92MS9zdG9yYWdlL2J1Y2tldHMvZW1haWwtYXNzZXRzL2ZpbGVzL=
+zZhOWFjZmIyMDAxOGNlMmYzYjBlL3ZpZXc/cHJvamVjdD02YTI2YzZkNTAwMjdjMTdjNDJhNiIs=
+ImFsdCI6IiIsImhyZWYiOiIiLCJ3aWR0aCI6MTAwLCJhbGlnbiI6ImNlbnRlciIsInJhZGl1cyI=
+6OH0seyJpZCI6ImIzajR3MiIsInR5cGUiOiJ0ZXh0IiwiaHRtbCI6IkluaXQgaXNu4oCZdCBxdW=
+l0ZSBvdmVyIHlldC48YnI+XG48YnI+Sm9pbiB1cyB0b21vcnJvdyBhdCA5OjAwIEFNIFBhY2lma=
+WMgVGltZSBvbiBEaXNjb3JkIGFzIEFwcHdyaXRlIHRlYW0gbWVtYmVycywgY29tbXVuaXR5IGNv=
+bnRyaWJ1dG9ycywgYW5kIGRldmVsb3BlcnMgdGFrZSB0aGUgc3RhZ2UgdG8gcmVjYXAgZXZlcnl=
+0aGluZyB3ZSBzaGlwcGVkIGR1cmluZyBJbml0LCB0YWxrIGFib3V0IHRoZWlyIGZhdm91cml0ZS=
+Bhbm5vdW5jZW1lbnRzLCBhbmQgY2xvc2Ugb3V0IHRoZSB3ZWVrIHRvZ2V0aGVyLjxicj5cbjxic=
+j5Db21lIGhhbmcgb3V0LCBzaGFyZSB5b3VyIGhpZ2hsaWdodHMgZnJvbSBJbml0LCBhbmQgam9p=
+biB0aGUgY29udmVyc2F0aW9uLiIsImFsaWduIjoibGVmdCIsImNvbG9yIjoiIiwic2l6ZSI6MTV=
+9LHsiaWQiOiJiNGVmdyIsInR5cGUiOiJidXR0b24iLCJsYWJlbCI6IkpvaW4gdGhlIGNsb3Npbm=
+cgcGFydHkiLCJocmVmIjoiaHR0cHM6Ly9kaXNjb3JkLmdnL1RldkV6bVI5cj9ldmVudD0xNTQzO=
+TIxOTE0NTMwMjM0NDQ4IiwiYWxpZ24iOiJsZWZ0IiwiYmciOiIiLCJjb2xvciI6IiNmZmZmZmYi=
+LCJyYWRpdXMiOjgsImZ1bGxXaWR0aCI6ZmFsc2V9LHsiaWQiOiJiazNzNHgiLCJ0eXBlIjoidGV=
+4dCIsImh0bWwiOiJIYXZlIHF1ZXN0aW9ucyBhYm91dCB0b2RheeKAmXMgcmVsZWFzZXM/IEpvaW=
+4gdXMgb24gPHN0cm9uZz48YSBocmVmPVwiaHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL2FwcHdya=
+XRlL2NvbW1lbnRzLzF3NzkxMW0vaW50cm9kdWNpbmdfYXBwd3JpdGVfZG9tYWluc19maXJld2Fs=
+bF9hbmRfb2F1dGgyL1wiPlJlZGRpdDwvYT48L3N0cm9uZz4sIHdoZXJlIHRoZSBBcHB3cml0ZSB=
+0ZWFtIHdpbGwgYmUgYW5zd2VyaW5nIHF1ZXN0aW9ucyBhYm91dCBEb21haW5zLCBGaXJld2FsbC=
+wgYW5kIE9BdXRoMiBTZXJ2ZXIuPGJyPjxicj5DYXRjaCB1cCBvbiBldmVyeSBhbm5vdW5jZW1lb=
+nQgZnJvbSBJbml0IGF0IDxhIGhyZWY9XCJodHRwczovL2FwcHdyaXRlLmlvL2luaXRcIj5hcHB3=
+cml0ZS5pby9pbml0PC9hPi4iLCJhbGlnbiI6ImxlZnQiLCJjb2xvciI6IiIsInNpemUiOjE1fSx=
+7ImlkIjoiYjlhZXN4IiwidHlwZSI6InNpZ25hdHVyZSIsInByb2ZpbGUiOiJlbGRhZCIsIm5hbW=
+UiOiJFbGRhZCBGdXgiLCJ0aXRsZSI6IkZvdW5kZXIgYW5kIENFTyIsImhhbmRsZSI6ImVsZGFkZ=
+nV4IiwiYXZhdGFyU3JjIjoiaHR0cHM6Ly9wdWxzZS5hcHB3cml0ZS5pby9pbWFnZXMvc2lnbmF0=
+dXJlcy9lbGRhZC5wbmciLCJhdmF0YXJTaXplIjo0OCwibGlua3MiOlt7Imljb24iOiJkaXNjb3J=
+kIiwibGFiZWwiOiJEaXNjb3JkIiwiaHJlZiI6Imh0dHBzOi8vYXBwd3JpdGUuaW8vZGlzY29yZC=
+J9LHsiaWNvbiI6ImdpdGh1YiIsImxhYmVsIjoiR2l0SHViIiwiaHJlZiI6Imh0dHBzOi8vZ2l0a=
+HViLmNvbS9hcHB3cml0ZS9hcHB3cml0ZSJ9LHsiaWNvbiI6IngiLCJsYWJlbCI6IlgiLCJocmVm=
+IjoiaHR0cHM6Ly94LmNvbS9hcHB3cml0ZSJ9XX0seyJpZCI6ImI4aXNidSIsInR5cGUiOiJkaXZ=
+pZGVyIiwiY29sb3IiOiIjZWRlZGYwIiwidGhpY2tuZXNzIjoxLCJwYWRkaW5nIjoxNH0seyJpZC=
+I6ImI2NTBlbSIsInR5cGUiOiJ0ZXh0IiwiaHRtbCI6IllvdSdyZSByZWNlaXZpbmcgdGhpcyBtZ=
+XNzYWdlIGFzIGEgc3Vic2NyaWJlciBvZiA8YSBocmVmPVwiaHR0cHM6Ly9hcHB3cml0ZS5pb1wi=
+PkFwcHdyaXRlPC9hPi4gSWYgeW91IHByZWZlciB0byBub3QgcmVjZWl2ZSB0aGVzZSBtZXNzYWd=
+lcyBhbnltb3JlLCBmZWVsIGZyZWUgdG8gPGEgaHJlZj1cInt7dW5zdWJzY3JpYmVfdXJsfX1cIj=
+51bnN1YnNjcmliZTwvYT4uIE91ciBwb3N0YWwgYWRkcmVzcyBpcyAyNTEgTGl0dGxlIEZhbGxzI=
+ERyaXZlLCBXaWxtaW5ndG9uLCBEZWxhd2FyZSwgMTk4MDgsIFVuaXRlZCBTdGF0ZXMuIiwiYWxp=
+Z24iOiJsZWZ0IiwiY29sb3IiOiIjODU4NThiIiwic2l6ZSI6MTJ9XX0=3D-->
+<!doctype html>
+<html>
+<head>
+  <meta charset=3D"utf-8">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1">
+  <meta name=3D"color-scheme" content=3D"light">
+  <title>Email</title>
+</head>
+<body style=3D"margin:0;padding:0;background-color:#f7f7f8;"><div style=3D"=
+font-size:1px;line-height:1px;height:1px;max-height:1px;overflow:hidden;mar=
+gin:0;padding:0;"><img src=3D"https://pulse.appwrite.io/api/track/open?camp=
+aignId=3D6a898edb0000d5f6e501&contactId=3Dct_fd9d8f269e43983f9c61f32a444701=
+14a&recipientId=3Dcr_2b0980899f12591b7fc2ca18&token=3De387f3560593649c845dc=
+d4a01e4b609f1d7c7c06a04f3b17bab484ba1f458c2" width=3D"1" height=3D"1" alt=
+=3D"" border=3D"0" style=3D"display:block;width:1px!important;height:1px!im=
+portant;border:0;margin:0;padding:0;opacity:0;" /></div>
+  <div style=3D"display:none;max-height:0;overflow:hidden;mso-hide:all;">Do=
+mains, Firewall, and OAuth2 Server are now live on Appwrite Cloud.&nbsp;&zw=
+nj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;=
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nb=
+sp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;=
+&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zw=
+nj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;=
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nb=
+sp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;=
+&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zw=
+nj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;=
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nb=
+sp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;=
+&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zw=
+nj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;=
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nb=
+sp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;=
+&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>
+  <table role=3D"presentation" width=3D"100%" cellpadding=3D"0" cellspacing=
+=3D"0" style=3D"background-color:#f7f7f8;">
+    <tr>
+      <td align=3D"center" style=3D"padding:32px 16px;">
+        <table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" st=
+yle=3D"width:100%;max-width:600px;background:#ffffff;border:1px solid #e8e8=
+ec;border-radius:12px;overflow:hidden;font-family:Arial, Helvetica, sans-se=
+rif;color-scheme:light">
+       =20
+        <tr><td style=3D"height:32px;font-size:0;line-height:0;">&nbsp;</td=
+></tr>
+        <tr><td style=3D"padding:16px 40px;text-align:left"><img src=3D"htt=
+ps://fra.cloud.appwrite.io/v1/storage/buckets/email-assets/files/6a6b457c00=
+0654b108d7/view?project=3D6a26c6d50027c17c42a6" alt=3D"Appwrite" style=3D"d=
+isplay:inline-block;width:10%;max-width:100%;height:auto;border:0;outline:n=
+one;border-radius:0px"></td></tr>
+        <tr><td style=3D"padding:6px 40px"><div style=3D"margin:0;font-size=
+:15px;line-height:1.7;color:#56565c;text-align:left">Hi <b>Kunal,</b></div>=
+</td></tr>
+        <tr><td style=3D"padding:6px 40px"><div style=3D"margin:0;font-size=
+:15px;line-height:1.7;color:#56565c;text-align:left"><strong>Welcome to Day=
+ 5 of Init. </strong>We=E2=80=99re closing out the week with three more rel=
+eases on Appwrite Cloud.<br><br>Today, we=E2=80=99re introducing <strong>Ap=
+pwrite Domains, Appwrite Firewall, and the Appwrite OAuth2 Server</strong>,=
+ giving you more control over how your app is hosted, protected, and connec=
+ted to other applications.</div></td></tr>
+        <tr><td style=3D"padding:10px 40px 6px"><h2 style=3D"margin:0;font-=
+size:19px;line-height:1.25;font-weight:700;color:#19191d;text-align:left">M=
+anage your Domains with Appwrite</h2></td></tr>
+        <tr><td style=3D"padding:16px 40px;text-align:center"><img src=3D"h=
+ttps://fra.cloud.appwrite.io/v1/storage/buckets/email-assets/files/6a9acb6b=
+000aa5b465e1/view?project=3D6a26c6d50027c17c42a6" alt=3D"" style=3D"display=
+:inline-block;width:100%;max-width:100%;height:auto;border:0;outline:none;b=
+order-radius:8px"></td></tr>
+        <tr><td style=3D"padding:6px 40px"><div style=3D"margin:0;font-size=
+:15px;line-height:1.7;color:#56565c;text-align:left">Appwrite can now act a=
+s your <strong>domain registrar and DNS host</strong>.
+<br><br>Register a new domain across 160+ TLDs, transfer one you already ow=
+n, manage DNS records, and connect your domains directly to Sites, Function=
+s, and APIs.</div></td></tr>
+        <tr><td style=3D"padding:14px 40px;text-align:left"><table role=3D"=
+presentation" cellpadding=3D"0" cellspacing=3D"0" style=3D"display:inline-b=
+lock"><tr><td style=3D"border-radius:8px;background:#fd366e;"><a href=3D"ht=
+tps://pulse.appwrite.io/api/track/click?campaignId=3D6a898edb0000d5f6e501&c=
+ontactId=3Dct_fd9d8f269e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f=
+12591b7fc2ca18&url=3Dhttps%3A%2F%2Fappwrite.io%2Fblog%2Fpost%2Fannouncing-a=
+ppwrite-domains&token=3Dbe9049af521be0a3777c6f89e02aa0f3ea8fc9a1b77c8f4248c=
+3e860bf193ec1" style=3D"display:inline-block;padding:12px 28px;font-size:14=
+px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:8px;te=
+xt-align:center;box-sizing:border-box">Read more</a></td></tr></table></td>=
+</tr>
+        <tr><td style=3D"padding:14px 40px"><div style=3D"border-top:1px so=
+lid #ededf0;font-size:0;line-height:0;">&nbsp;</div></td></tr>
+        <tr><td style=3D"padding:10px 40px 6px"><h2 style=3D"margin:0;font-=
+size:19px;line-height:1.25;font-weight:700;color:#19191d;text-align:left">C=
+ontrol traffic with Appwrite Firewall</h2></td></tr>
+        <tr><td style=3D"padding:16px 40px;text-align:center"><img src=3D"h=
+ttps://fra.cloud.appwrite.io/v1/storage/buckets/email-assets/files/6a9acb7e=
+002f4f270303/view?project=3D6a26c6d50027c17c42a6" alt=3D"" style=3D"display=
+:inline-block;width:100%;max-width:100%;height:auto;border:0;outline:none;b=
+order-radius:8px"></td></tr>
+        <tr><td style=3D"padding:6px 40px"><div style=3D"margin:0;font-size=
+:15px;line-height:1.7;color:#56565c;text-align:left">Appwrite Firewall adds=
+ <strong>project-level traffic control</strong> to your API, Functions, and=
+ Sites.<br>
+<br>Create rules to deny, bypass, challenge, rate-limit, or redirect reques=
+ts based on attributes like IP address, hostname, path, headers, user agent=
+, or location.</div></td></tr>
+        <tr><td style=3D"padding:14px 40px;text-align:left"><table role=3D"=
+presentation" cellpadding=3D"0" cellspacing=3D"0" style=3D"display:inline-b=
+lock"><tr><td style=3D"border-radius:8px;background:#fd366e;"><a href=3D"ht=
+tps://pulse.appwrite.io/api/track/click?campaignId=3D6a898edb0000d5f6e501&c=
+ontactId=3Dct_fd9d8f269e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f=
+12591b7fc2ca18&url=3Dhttps%3A%2F%2Fappwrite.io%2Fblog%2Fpost%2Fannouncing-a=
+ppwrite-firewall&token=3D7660967bd5208ee830fa81d47bfa1bd1ed80c7f12fd9937fad=
+510a62693f2152" style=3D"display:inline-block;padding:12px 28px;font-size:1=
+4px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:8px;t=
+ext-align:center;box-sizing:border-box">Learn more</a></td></tr></table></t=
+d></tr>
+        <tr><td style=3D"padding:14px 40px"><div style=3D"border-top:1px so=
+lid #ededf0;font-size:0;line-height:0;">&nbsp;</div></td></tr>
+        <tr><td style=3D"padding:10px 40px 6px"><h2 style=3D"margin:0;font-=
+size:19px;line-height:1.25;font-weight:700;color:#19191d;text-align:left">T=
+urn your project into an identity provider</h2></td></tr>
+        <tr><td style=3D"padding:16px 40px;text-align:center"><img src=3D"h=
+ttps://fra.cloud.appwrite.io/v1/storage/buckets/email-assets/files/6a9acb85=
+002c13dae686/view?project=3D6a26c6d50027c17c42a6" alt=3D"" style=3D"display=
+:inline-block;width:100%;max-width:100%;height:auto;border:0;outline:none;b=
+order-radius:8px"></td></tr>
+        <tr><td style=3D"padding:6px 40px"><div style=3D"margin:0;font-size=
+:15px;line-height:1.7;color:#56565c;text-align:left">Your Appwrite project =
+can now act as an <strong>OAuth 2.1 and OpenID Connect provider</strong>.<b=
+r>
+<br>Third-party apps can offer <strong><a href=3D"https://pulse.appwrite.io=
+/api/track/click?campaignId=3D6a898edb0000d5f6e501&contactId=3Dct_fd9d8f269=
+e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f12591b7fc2ca18&url=3Dht=
+tps%3A%2F%2Fappwrite.io%2Fblog%2Fpost%2Fannouncing-apps-for-appwrite-partne=
+rs&token=3D9b416fb99ecbe22a751842239d449f3187477dc61c8b75b3d1f43a303365751a=
+" style=3D"color:#fd366e;text-decoration:underline;">Sign in with your prod=
+uct</a></strong>, request scoped access to your APIs, and use standard OAut=
+h and OIDC flows while Appwrite handles the authorization infrastructure.</=
+div></td></tr>
+        <tr><td style=3D"padding:14px 40px;text-align:left"><table role=3D"=
+presentation" cellpadding=3D"0" cellspacing=3D"0" style=3D"display:inline-b=
+lock"><tr><td style=3D"border-radius:8px;background:#fd366e;"><a href=3D"ht=
+tps://pulse.appwrite.io/api/track/click?campaignId=3D6a898edb0000d5f6e501&c=
+ontactId=3Dct_fd9d8f269e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f=
+12591b7fc2ca18&url=3Dhttps%3A%2F%2Fappwrite.io%2Fblog%2Fpost%2Fannouncing-o=
+auth2-server&token=3D40e7d4219effd36f02c3af3697119111d88b4ea74170fd18961c7c=
+c97c98d657" style=3D"display:inline-block;padding:12px 28px;font-size:14px;=
+font-weight:bold;color:#ffffff;text-decoration:none;border-radius:8px;text-=
+align:center;box-sizing:border-box">Read more</a></td></tr></table></td></t=
+r>
+        <tr><td style=3D"padding:14px 40px"><div style=3D"border-top:1px so=
+lid #ededf0;font-size:0;line-height:0;">&nbsp;</div></td></tr>
+        <tr><td style=3D"padding:10px 40px 6px"><h2 style=3D"margin:0;font-=
+size:19px;line-height:1.25;font-weight:700;color:#19191d;text-align:left">W=
+atch the Day 5 livestream recording</h2></td></tr>
+        <tr><td style=3D"padding:16px 40px;text-align:center"><img src=3D"h=
+ttps://fra.cloud.appwrite.io/v1/storage/buckets/email-assets/files/6a9acbb4=
+002aae21a5b3/view?project=3D6a26c6d50027c17c42a6" alt=3D"" style=3D"display=
+:inline-block;width:100%;max-width:100%;height:auto;border:0;outline:none;b=
+order-radius:8px"></td></tr>
+        <tr><td style=3D"padding:6px 40px"><div style=3D"margin:0;font-size=
+:15px;line-height:1.7;color:#56565c;text-align:left">We wrapped up the fina=
+l day of Init with a livestream covering <strong>Appwrite Domains, Firewall=
+, and OAuth2 Server</strong>, along with demos and questions from the commu=
+nity.<br>
+<br>We also announced the winner of our grand prize, <strong>12 months of C=
+laude Max 20x</strong>, during the stream.
+</div></td></tr>
+        <tr><td style=3D"padding:14px 40px;text-align:left"><table role=3D"=
+presentation" cellpadding=3D"0" cellspacing=3D"0" style=3D"display:inline-b=
+lock"><tr><td style=3D"border-radius:8px;background:#fd366e;"><a href=3D"ht=
+tps://pulse.appwrite.io/api/track/click?campaignId=3D6a898edb0000d5f6e501&c=
+ontactId=3Dct_fd9d8f269e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f=
+12591b7fc2ca18&url=3Dhttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DLYq0qtyQmJ=
+k&token=3D0ae7ea3328e4e2390bb4a9e82ba66d702183c9860ef7d07d152597413a73e364"=
+ style=3D"display:inline-block;padding:12px 28px;font-size:14px;font-weight=
+:bold;color:#ffffff;text-decoration:none;border-radius:8px;text-align:cente=
+r;box-sizing:border-box">Watch the recording</a></td></tr></table></td></tr=
+>
+        <tr><td style=3D"padding:14px 40px"><div style=3D"border-top:1px so=
+lid #ededf0;font-size:0;line-height:0;">&nbsp;</div></td></tr>
+        <tr><td style=3D"padding:10px 40px 6px"><h2 style=3D"margin:0;font-=
+size:19px;line-height:1.25;font-weight:700;color:#19191d;text-align:left">J=
+oin us for the Init closing party</h2></td></tr>
+        <tr><td style=3D"padding:16px 40px;text-align:center"><img src=3D"h=
+ttps://fra.cloud.appwrite.io/v1/storage/buckets/email-assets/files/6a9acfb2=
+0018ce2f3b0e/view?project=3D6a26c6d50027c17c42a6" alt=3D"" style=3D"display=
+:inline-block;width:100%;max-width:100%;height:auto;border:0;outline:none;b=
+order-radius:8px"></td></tr>
+        <tr><td style=3D"padding:6px 40px"><div style=3D"margin:0;font-size=
+:15px;line-height:1.7;color:#56565c;text-align:left">Init isn=E2=80=99t qui=
+te over yet.<br>
+<br>Join us tomorrow at 9:00 AM Pacific Time on Discord as Appwrite team me=
+mbers, community contributors, and developers take the stage to recap every=
+thing we shipped during Init, talk about their favourite announcements, and=
+ close out the week together.<br>
+<br>Come hang out, share your highlights from Init, and join the conversati=
+on.</div></td></tr>
+        <tr><td style=3D"padding:14px 40px;text-align:left"><table role=3D"=
+presentation" cellpadding=3D"0" cellspacing=3D"0" style=3D"display:inline-b=
+lock"><tr><td style=3D"border-radius:8px;background:#fd366e;"><a href=3D"ht=
+tps://pulse.appwrite.io/api/track/click?campaignId=3D6a898edb0000d5f6e501&c=
+ontactId=3Dct_fd9d8f269e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f=
+12591b7fc2ca18&url=3Dhttps%3A%2F%2Fdiscord.gg%2FTevEzmR9r%3Fevent%3D1543921=
+914530234448&token=3Da9c7dacf5fea22a2450ddc816af7f31f4b6326aba621e3369ffcac=
+663a507aaf" style=3D"display:inline-block;padding:12px 28px;font-size:14px;=
+font-weight:bold;color:#ffffff;text-decoration:none;border-radius:8px;text-=
+align:center;box-sizing:border-box">Join the closing party</a></td></tr></t=
+able></td></tr>
+        <tr><td style=3D"padding:6px 40px"><div style=3D"margin:0;font-size=
+:15px;line-height:1.7;color:#56565c;text-align:left">Have questions about t=
+oday=E2=80=99s releases? Join us on <strong><a href=3D"https://pulse.appwri=
+te.io/api/track/click?campaignId=3D6a898edb0000d5f6e501&contactId=3Dct_fd9d=
+8f269e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f12591b7fc2ca18&url=
+=3Dhttps%3A%2F%2Fwww.reddit.com%2Fr%2Fappwrite%2Fcomments%2F1w7911m%2Fintro=
+ducing_appwrite_domains_firewall_and_oauth2%2F&token=3D7e7e7f6a52f9ec14d6ad=
+22bbedbc5644eed9e62c066ae07cd846c52b4c6ae467" style=3D"color:#fd366e;text-d=
+ecoration:underline;">Reddit</a></strong>, where the Appwrite team will be =
+answering questions about Domains, Firewall, and OAuth2 Server.<br><br>Catc=
+h up on every announcement from Init at <a href=3D"https://pulse.appwrite.i=
+o/api/track/click?campaignId=3D6a898edb0000d5f6e501&contactId=3Dct_fd9d8f26=
+9e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f12591b7fc2ca18&url=3Dh=
+ttps%3A%2F%2Fappwrite.io%2Finit&token=3D7326cc8c4893c059f25d6c5ba7895dbcd13=
+b6feac8155d9ef5b4cffe8d652974" style=3D"color:#fd366e;text-decoration:under=
+line;">appwrite.io/init</a>.</div></td></tr>
+        <tr><td style=3D"padding:16px 40px"><table role=3D"presentation" ce=
+llpadding=3D"0" cellspacing=3D"0"><tr><td valign=3D"top" style=3D"padding-r=
+ight:14px;width:48px;"><img src=3D"https://pulse.appwrite.io/images/signatu=
+res/eldad.png" alt=3D"Eldad Fux" width=3D"48" height=3D"48" style=3D"displa=
+y:block;width:48px;height:48px;border-radius:50%;object-fit:cover;border:0;=
+"></td><td valign=3D"top"><p style=3D"margin:0;line-height:1.5;font-size:15=
+px;font-weight:bold;color:#19191d">Eldad Fux</p><p style=3D"margin:0;line-h=
+eight:1.5;font-size:13px;color:#56565c">Founder and CEO</p><p style=3D"marg=
+in:6px 0 0;font-size:13px;line-height:1.5;"><a href=3D"https://pulse.appwri=
+te.io/api/track/click?campaignId=3D6a898edb0000d5f6e501&contactId=3Dct_fd9d=
+8f269e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f12591b7fc2ca18&url=
+=3Dhttps%3A%2F%2Fx.com%2Feldadfux&token=3D81baf259e45e1dd0c3c76a0b5556539d4=
+44010d5f6fb477f4253537f3287f23e" style=3D"color:#fd366e;text-decoration:non=
+e;">@eldadfux</a></p><table role=3D"presentation" cellpadding=3D"0" cellspa=
+cing=3D"0" style=3D"margin-top:10px;"><tr><td style=3D"padding-right:12px;"=
+><a href=3D"https://pulse.appwrite.io/api/track/click?campaignId=3D6a898edb=
+0000d5f6e501&contactId=3Dct_fd9d8f269e43983f9c61f32a44470114a&recipientId=
+=3Dcr_2b0980899f12591b7fc2ca18&url=3Dhttps%3A%2F%2Fappwrite.io%2Fdiscord&to=
+ken=3Dd80d0cbf987ed58d2cf1b44e9114cb07962035e12bdf61d35eeeda261f4ed9e2" tit=
+le=3D"Discord" style=3D"display:inline-block;text-decoration:none;"><img sr=
+c=3D"https://pulse.appwrite.io/images/social/discord.png" alt=3D"Discord" w=
+idth=3D"18" height=3D"18" style=3D"display:block;width:18px;height:18px;bor=
+der:0;"></a></td><td style=3D"padding-right:12px;"><a href=3D"https://pulse=
+.appwrite.io/api/track/click?campaignId=3D6a898edb0000d5f6e501&contactId=3D=
+ct_fd9d8f269e43983f9c61f32a44470114a&recipientId=3Dcr_2b0980899f12591b7fc2c=
+a18&url=3Dhttps%3A%2F%2Fgithub.com%2Fappwrite%2Fappwrite&token=3Dbb8b5855a1=
+8df33087c9310e2c7dc94138234306f84c7d888106136d3bf3f7db" title=3D"GitHub" st=
+yle=3D"display:inline-block;text-decoration:none;"><img src=3D"https://puls=
+e.appwrite.io/images/social/github.png" alt=3D"GitHub" width=3D"18" height=
+=3D"18" style=3D"display:block;width:18px;height:18px;border:0;"></a></td><=
+td style=3D"padding-right:12px;"><a href=3D"https://pulse.appwrite.io/api/t=
+rack/click?campaignId=3D6a898edb0000d5f6e501&contactId=3Dct_fd9d8f269e43983=
+f9c61f32a44470114a&recipientId=3Dcr_2b0980899f12591b7fc2ca18&url=3Dhttps%3A=
+%2F%2Fx.com%2Fappwrite&token=3D7be249d37b3f800ca2bdcb0dcb16700ddf2d46300b46=
+5531485dddb102b509ca" title=3D"X" style=3D"display:inline-block;text-decora=
+tion:none;"><img src=3D"https://pulse.appwrite.io/images/social/x.png" alt=
+=3D"X" width=3D"18" height=3D"18" style=3D"display:block;width:18px;height:=
+18px;border:0;"></a></td></tr></table></td></tr></table></td></tr>
+        <tr><td style=3D"padding:14px 40px"><div style=3D"border-top:1px so=
+lid #ededf0;font-size:0;line-height:0;">&nbsp;</div></td></tr>
+        <tr><td style=3D"padding:6px 40px"><div style=3D"margin:0;font-size=
+:12px;line-height:1.7;color:#85858b;text-align:left">You're receiving this =
+message as a subscriber of <a href=3D"https://pulse.appwrite.io/api/track/c=
+lick?campaignId=3D6a898edb0000d5f6e501&contactId=3Dct_fd9d8f269e43983f9c61f=
+32a44470114a&recipientId=3Dcr_2b0980899f12591b7fc2ca18&url=3Dhttps%3A%2F%2F=
+appwrite.io&token=3Da57a703c33cfe95311c106f794454e9203d131342a1e5d1774e2054=
+0b4e7a8a2" style=3D"color:#85858b;text-decoration:underline;">Appwrite</a>.=
+ If you prefer to not receive these messages anymore, feel free to <a href=
+=3D"https://pulse.appwrite.io/unsubscribe?campaignId=3D6a898edb0000d5f6e501=
+&contactId=3Dct_fd9d8f269e43983f9c61f32a44470114a&email=3Dkunalmaidkar%40gm=
+ail.com&token=3D32123e93b46d2db271ff0c8b0e43457f9b66d5756189832fbfe8cf4c254=
+0d19e" style=3D"color:#85858b;text-decoration:underline;">unsubscribe</a>. =
+Our postal address is 251 Little Falls Drive, Wilmington, Delaware, 19808, =
+United States.</div></td></tr>
+        <tr><td style=3D"height:32px;font-size:0;line-height:0;">&nbsp;</td=
+></tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+<img src=3D"http://url7241.appwrite.io/wf/open?upn=3Du001.F3QkUTppLK69V5Lcl=
+we2jvOlkXqj0vnLjjii-2FUqDVV7WdcimcstQX0QC-2BjzW-2FK-2BDYfx-2BAUU-2Bg-2FmMYJ=
+kXL1IMbBmOT2OhJuBseIF-2BBb59KK7poffD8AG8GONcj7Ku2yDkvs-2BsTQcKDNdbJxzB2ohTg=
+A6jF3cHdwQufLkH-2F1YbjpgWkmiNEnEqAROy3q9A-2BNJhqtG-2FSkEdmo-2Bd9EelSLyzOU3T=
+gEPPezF3r2twQTKQVlgGZayG6ztOrUX0G6bEAjIt7PiklAV1eYwWRow4EI6-2FkMSX6qvxb1y3n=
+azLcO2tQDNS4GdoBeJk3-2BP63ladexL7CMpMsDZF-2FwYkA9I0H0gMbHZI7Yt8EbchVpiE-2Br=
+CVINiv4I6fnTJzLI45z3NnTfmCKPMRR78sBdV6qRBGjq9EKKTZWwxkBAtvtj-2FLc1rfYo-2FRG=
+an2sf7lln20au3R7gUuJFx9hAuc7xNzvlQrFcaqdIUkiGSqct3ENO11HD7xMPVNKiaj1VEQMDSC=
+hzZk6aNGFtyTtCqh6iNNXIVftpYWcg-3D-3D" alt=3D"" width=3D"1" height=3D"1" bor=
+der=3D"0" style=3D"height:1px !important;width:1px !important;border-width:=
+0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-righ=
+t:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bo=
+ttom:0 !important;padding-right:0 !important;padding-left:0 !important;"/><=
+/body>
+</html>
